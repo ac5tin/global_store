@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var global_store = /** @class */ (function () {
     function global_store() {
         var _this = this;
@@ -39,4 +37,4 @@ var global_store = /** @class */ (function () {
     }
     return global_store;
 }());
-exports.default = global_store;
+export default global_store;
