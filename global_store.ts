@@ -21,20 +21,37 @@ class global_store {
 	reset_globals = () : void =>{
 		this.store = {};
 	};
+
+    // ========== STORE ==========
 	
 	
 	/** sets value to global store, similar to this.setState in react
 	 * @param {string} key
 	 * @param {string} value
 	 */
-	setStore = (key,value) : void =>this.store[key] = value;
+	setStore = (key:string,value:any) : void =>this.store[key] = value;
 
 
 	/** returns value from store
 	 * @param {string} key
 	 * @returns {any} value 
 	 */
-	fetchStore = (key) : any => this.store[key];
+	fetchStore = (key:string = '') : any => {
+        if(!key)return this.store;
+        const DELIMITER:string = '>';
+        key = key.trim();
+        const splitted_keys:string[] = key.split(DELIMITER);
+        if(splitted_keys.length > 0){
+            let value:any= JSON.parse(JSON.stringify(this.store));
+            // go down layers
+            splitted_keys.forEach(k => value = value[k.trim()]);
+            return value;
+        }else{
+            return this.store[key];
+        }
+    }
+
+    // ========== STATE ==========
 
 	/** sets value to global store state, similar to this.setState in react
 	 * @param {string} key
@@ -48,10 +65,7 @@ class global_store {
 	 */
 	fetchState = (key) : any => this.state[key];
 
-
-
-	
-	
+    // ========== OTHER HELPER FUNCTIONS ==========
 	
 }
 

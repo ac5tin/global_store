@@ -14,6 +14,7 @@ var global_store = /** @class */ (function () {
         this.reset_globals = function () {
             _this.store = {};
         };
+        // ========== STORE ==========
         /** sets value to global store, similar to this.setState in react
          * @param {string} key
          * @param {string} value
@@ -23,7 +24,24 @@ var global_store = /** @class */ (function () {
          * @param {string} key
          * @returns {any} value
          */
-        this.fetchStore = function (key) { return _this.store[key]; };
+        this.fetchStore = function (key) {
+            if (key === void 0) { key = ''; }
+            if (!key)
+                return _this.store;
+            var DELIMITER = '>';
+            key = key.trim();
+            var splitted_keys = key.split(DELIMITER);
+            if (splitted_keys.length > 0) {
+                var value_1 = JSON.parse(JSON.stringify(_this.store));
+                // go down layers
+                splitted_keys.forEach(function (k) { return value_1 = value_1[k.trim()]; });
+                return value_1;
+            }
+            else {
+                return _this.store[key];
+            }
+        };
+        // ========== STATE ==========
         /** sets value to global store state, similar to this.setState in react
          * @param {string} key
          * @param {string} value
@@ -37,4 +55,3 @@ var global_store = /** @class */ (function () {
     }
     return global_store;
 }());
-

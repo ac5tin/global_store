@@ -1,17 +1,20 @@
 // @ts-ignore
-import GS from './global_store.js';
+import GS from './global_store.ts';
 // instantiate global store object
 var gs = new GS();
 // setting store
-gs.setStore('test0', 'hi');
+gs.setStore('test0', { a: 'b' });
 // fetching from store
-console.log(gs.fetchStore('test0'));
+console.log("===== fetch store =====");
+console.log(gs.fetchStore('test0 > a'));
 // setting state
 gs.setState('test1', 'hello');
 // fetch from state
+console.log("===== fetch state =====");
 console.log(gs.fetchState('test1'));
 // upon state change
 gs.onStateUpdate = function (target, key, value) {
+    console.log("===== upon state change =====");
     console.log(value);
 };
 gs.setState('test1', 'changed');
