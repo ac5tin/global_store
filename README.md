@@ -5,7 +5,8 @@
 `<script src="dist/global_store.js"></script>`
 
 ### usage
-`const gs = new global_store();
+```javascript
+const gs = new global_store();
 // setting store
 gs.setStore('test0', { a: 'b' });
 // fetch from store
@@ -21,7 +22,8 @@ gs.onStateUpdate = function (target, key, value) {
     console.log("===== upon state change =====");
     console.log(value);
 };
-gs.setState('test1', 'changed');`
+gs.setState('test1', 'changed');
+```
 #### onStateUpdate is called whenever the state is changed
 
 
