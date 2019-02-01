@@ -37,4 +37,4 @@ var global_store = /** @class */ (function () {
     }
     return global_store;
 }());
-
+export default global_store;

@@ -1,6 +1,7 @@
-
+// @ts-ignore
+import GS from './global_store.js';
 // instantiate global store object
-var gs = new global_store();
+var gs = new GS();
 // setting store
 gs.setStore('test0', 'hi');
 // fetching from store
