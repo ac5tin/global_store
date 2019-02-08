@@ -1,44 +1,42 @@
-var global_store = /** @class */ (function () {
-    function global_store() {
-        var _this = this;
+class global_store {
+    constructor() {
         this.store = {};
         this.__proxystate = {};
         /** on value change */
-        this.onStateUpdate = function (target, key, value) { };
+        this.onStateUpdate = (target, key, value) => { };
         this.proxy_handler = {
-            set: function (target, key, value) { _this.__proxystate[key] = value; _this.onStateUpdate(target, key, value); return true; },
-            get: function (target, property, receiver) { return target[property]; }
+            set: (target, key, value) => { this.__proxystate[key] = value; this.onStateUpdate(target, key, value); return true; },
+            get: (target, property, receiver) => target[property]
         };
         this.state = new Proxy(this.__proxystate, this.proxy_handler);
         /** resets all global store values */
-        this.reset_globals = function () {
-            _this.store = {};
+        this.reset_globals = () => {
+            this.store = {};
         };
         // ========== STORE ==========
         /** sets value to global store, similar to this.setState in react
          * @param {string} key
          * @param {string} value
          */
-        this.setStore = function (key, value) { return _this.store[key] = value; };
+        this.setStore = (key, value) => this.store[key] = value;
         /** returns value from store
          * @param {string} key
          * @returns {any} value
          */
-        this.fetchStore = function (key) {
-            if (key === void 0) { key = ''; }
+        this.fetchStore = (key = '') => {
             if (!key)
-                return _this.store;
-            var DELIMITER = '>';
+                return this.store;
+            const DELIMITER = '>';
             key = key.trim();
-            var splitted_keys = key.split(DELIMITER);
+            const splitted_keys = key.split(DELIMITER);
             if (splitted_keys.length > 0) {
-                var value_1 = JSON.parse(JSON.stringify(_this.store));
+                let value = JSON.parse(JSON.stringify(this.store));
                 // go down layers
-                splitted_keys.forEach(function (k) { return value_1 = value_1[k.trim()]; });
-                return value_1;
+                splitted_keys.forEach(k => value = value[k.trim()]);
+                return value;
             }
             else {
-                return _this.store[key];
+                return this.store[key];
             }
         };
         // ========== STATE ==========
@@ -46,13 +44,12 @@ var global_store = /** @class */ (function () {
          * @param {string} key
          * @param {string} value
          */
-        this.setState = function (key, value) { return _this.state[key] = value; };
+        this.setState = (key, value) => this.state[key] = value;
         /** returns value from state
          * @param {string} key
          * @returns {any} value
          */
-        this.fetchState = function (key) { return _this.state[key]; };
+        this.fetchState = (key) => this.state[key];
     }
-    return global_store;
-}());
+}
 export default global_store;
