@@ -57,7 +57,7 @@ class global_store {
 	 * @param {string} key
 	 * @param {string} value
 	 */
-	setState = (key,value) : any => this.state[key] = value;
+	setState = (key,value) : void => this.state[key] = value;
 
 	/** returns value from state
 	 * @param {string} key
