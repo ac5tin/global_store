@@ -13,7 +13,12 @@ class global_store {
 	state = new Proxy(this.__proxystate,this.proxy_handler);
 	
 	
-	constructor(){
+	constructor(initialState:Object = {}){
+		if(Object.keys(initialState).length){
+			this.__proxystate = initialState;
+			this.state = new Proxy(this.__proxystate,this.proxy_handler);
+		}
+		
 	}
 
 	

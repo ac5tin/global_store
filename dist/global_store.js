@@ -1,5 +1,5 @@
 class global_store {
-    constructor() {
+    constructor(initialState = {}) {
         this.store = {};
         this.__proxystate = {};
         /** on value change */
@@ -50,5 +50,10 @@ class global_store {
          * @returns {any} value
          */
         this.fetchState = (key) => this.state[key];
+        if (Object.keys(initialState).length) {
+            this.__proxystate = initialState;
+            this.state = new Proxy(this.__proxystate, this.proxy_handler);
+        }
     }
 }
+
