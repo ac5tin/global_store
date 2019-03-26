@@ -28,7 +28,7 @@ gs.setState('test1', 'changed');
 
 
 ### persist storage
-```
+```javascript
 // store item in session storage
 gs.onStateUpdate = target => sessionStorage.setItem('gs',JSON.stringify(target))
 
