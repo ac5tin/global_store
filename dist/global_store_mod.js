@@ -57,3 +57,5 @@ class global_store {
     }
 }
 
+
+export default global_store;
